@@ -3,7 +3,13 @@ import moment from 'moment';
 import tinycolor from 'tinycolor2';
 import { MetricsPanelCtrl } from 'grafana/app/plugins/sdk';
 import { AnnotationEvent } from './event';
-import { colors } from 'grafana/app/core/core';
+import {
+  DEFAULT_ANNOTATION_COLOR,
+  OK_COLOR,
+  ALERTING_COLOR,
+  NO_DATA_COLOR,
+  REGION_FILL_ALPHA
+} from './colors';
 
 export class EventManager {
   event: AnnotationEvent;
@@ -51,22 +57,22 @@ export class EventManager {
 
     var types = {
       $__alerting: {
-        color: colors.ALERTING_COLOR,
+        color: ALERTING_COLOR,
         position: 'BOTTOM',
         markerSize: 5,
       },
       $__ok: {
-        color: colors.OK_COLOR,
+        color: OK_COLOR,
         position: 'BOTTOM',
         markerSize: 5,
       },
       $__no_data: {
-        color: colors.NO_DATA_COLOR,
+        color: NO_DATA_COLOR,
         position: 'BOTTOM',
         markerSize: 5,
       },
       $__editing: {
-        color: colors.DEFAULT_ANNOTATION_COLOR,
+        color: DEFAULT_ANNOTATION_COLOR,
         position: 'BOTTOM',
         markerSize: 5,
       },
@@ -142,7 +148,7 @@ function getRegions(events) {
 
 function addRegionMarking(regions, flotOptions) {
   let markings = flotOptions.grid.markings;
-  let defaultColor = colors.DEFAULT_ANNOTATION_COLOR;
+  let defaultColor = DEFAULT_ANNOTATION_COLOR;
   let fillColor;
 
   _.each(regions, region => {
@@ -152,7 +158,7 @@ function addRegionMarking(regions, flotOptions) {
       fillColor = defaultColor;
     }
 
-    fillColor = addAlphaToRGB(fillColor, colors.REGION_FILL_ALPHA);
+    fillColor = addAlphaToRGB(fillColor, REGION_FILL_ALPHA);
     markings.push({
       xaxis: { from: region.min, to: region.timeEnd },
       color: fillColor,

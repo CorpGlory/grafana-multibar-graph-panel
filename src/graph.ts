@@ -8,6 +8,7 @@ import './vendor/flot/jquery.flot.crosshair';
 import './vendor/flot/jquery.flot.dashes';
 import './vendor/flot/jquery.flot.events';
 import { EventManager } from './vendor/grafana/event_manager';
+import { updateLegendValues } from './vendor/grafana/time_series2';
 
 import * as $ from 'jquery';
 import _ from 'lodash';
@@ -62,8 +63,7 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
         }
         annotations = ctrl.annotations || [];
         buildFlotPairs(data);
-        // TODO: import updateLegendValues from Grafana
-        //updateLegendValues(data, panel);
+        updateLegendValues(data, panel);
 
         ctrl.events.emit('render-legend');
       });
