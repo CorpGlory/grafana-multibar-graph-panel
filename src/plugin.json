@@ -1,0 +1,20 @@
+{
+  "type": "panel",
+  "name": "Graph Panel",
+  "id": "corpglory-graph-panel",
+
+  "info": {
+    "author": {
+      "name": "Grafana Project",
+      "url": "https://grafana.com"
+    },
+    "logos": {
+      "small": "img/icn-graph-panel.svg",
+      "large": "img/icn-graph-panel.svg"
+    }
+  },
+  "dependencies": {
+    "grafanaVersion": "4.6.x"
+  }
+}
+
