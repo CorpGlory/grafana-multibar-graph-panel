@@ -1,5 +1,8 @@
 node_modules
-dist
+dist/*
+!dist/screenshots
+!dist/img
+!dist/plugin.json
 npm-debug.log
 coverage/
 .aws-config.json
