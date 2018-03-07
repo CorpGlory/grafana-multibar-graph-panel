@@ -1,7 +1,7 @@
 {
   "type": "panel",
-  "name": "Graph Panel",
-  "id": "corpglory-graph-panel",
+  "name": "Multibar Graph Panel",
+  "id": "corpglory-multibar-graph-panel",
 
   "info": {
     "author": {
