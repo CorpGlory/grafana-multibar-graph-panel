@@ -1,6 +1,7 @@
 import './vendor/flot/jquery.flot';
 import './vendor/flot/jquery.flot.time';
 import './vendor/flot/jquery.flot.selection';
+import './vendor/flot/jquery.flot.orderbars';
 import './vendor/flot/jquery.flot.stack';
 import './vendor/flot/jquery.flot.stackpercent';
 import './vendor/flot/jquery.flot.fillbelow';
@@ -261,9 +262,26 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
           }
           default: {
             options.series.bars.barWidth = getMinTimeStepOfSeries(data) / 1.5;
+            if (shouldDisplaySideBySide()) {
+              displaySideBySide(sortedSeries, options);
+            }
             addTimeAxis(options);
             break;
           }
+        }
+      }
+
+      function shouldDisplaySideBySide() {
+        return panel.displayBarsSideBySide && !panel.stack && panel.xaxis.mode === 'time';
+      }
+
+      function displaySideBySide(sortedSeries, options) {
+        let barsSeries = _.filter(sortedSeries, series => series.bars && series.bars.show !== false);
+        let barWidth = options.series.bars.barWidth / barsSeries.length;
+        for (let i = 0; i < barsSeries.length; i++) {
+          let series = sortedSeries[i];
+          series.bars.order = i;
+          series.bars.barWidth = barWidth;
         }
       }
 

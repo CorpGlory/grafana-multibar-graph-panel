@@ -25,7 +25,9 @@
 			<gf-form-switch class="gf-form" label="Points" label-class="width-5" checked="ctrl.panel.points" on-change="ctrl.render()"></gf-form-switch>
 		</div>
 		<div class="section gf-form-group">
-			<h5 class="section-heading">Mode Options</h5>
+      <h5 class="section-heading">Mode Options</h5>
+      <gf-form-switch ng-show="ctrl.panel.bars" class="gf-form" label="Side By Side" label-class="width-8" checked="ctrl.panel.displayBarsSideBySide" on-change="ctrl.render()">
+      </gf-form-switch>
 			<div class="gf-form" ng-show="ctrl.panel.lines">
 				<label class="gf-form-label width-8">Fill</label>
 				<div class="gf-form-select-wrapper max-width-5">
