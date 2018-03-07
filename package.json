@@ -1,5 +1,5 @@
 {
-  "name": "grafana-graph-panel",
+  "name": "grafana-multibar-graph-panel",
   "version": "0.1.0",
   "description": "Webpack copy of Grafana default panel",
   "main": "dist/module",
