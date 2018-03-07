@@ -18,4 +18,5 @@ Based on [grafana-plugin-template-webpack](https://github.com/CorpGlory/grafana-
 # Screenshots
 
 ![Side-by-side bars enabled](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/dist/screenshots/sideBySideEnabled.png)
+
 ![Side-by-side bars disabled](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/dist/screenshots/sideBySideDisabled.png)
