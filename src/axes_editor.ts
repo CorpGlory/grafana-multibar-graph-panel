@@ -83,7 +83,7 @@ export function axesEditorComponent() {
   return {
     restrict: 'E',
     scope: true,
-    templateUrl: 'public/plugins/corpglory-graph-panel/partials/axes_editor.html',
+    templateUrl: 'public/plugins/corpglory-multibar-graph-panel/partials/axes_editor.html',
     controller: AxesEditorCtrl,
   };
 }
