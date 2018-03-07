@@ -1,5 +1,5 @@
 import kbn from 'grafana/app/core/utils/kbn';
-import { getFlotTickDecimals } from 'grafana/app/core/utils/ticks';
+import { getFlotTickDecimals } from './ticks';
 import _ from 'lodash';
 
 function matchSeriesOverride(aliasOrRegex, seriesAlias) {
