@@ -22,4 +22,9 @@ npm run build
 
 # Credits
 
-Based on [grafana-plugin-template-webpack](https://github.com/CorpGlory/grafana-plugin-template-webpack) and [@types/grafana](https://github.com/CorpGlory/types-grafana)
+Based on 
+
+* [grafana-plugin-template-webpack](https://github.com/CorpGlory/grafana-plugin-template-webpack)
+* [grafana-graph-panel](https://github.com/CorpGlory/grafana-graph-panel)
+* [@types/grafana](https://github.com/CorpGlory/types-grafana)
+
