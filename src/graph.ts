@@ -10,12 +10,12 @@ import './vendor/flot/jquery.flot.dashes';
 import './vendor/flot/jquery.flot.events';
 import { EventManager } from './vendor/grafana/event_manager';
 import { updateLegendValues } from './vendor/grafana/time_series2';
+import { tickStep } from './vendor/grafana/ticks';
 
 import * as $ from 'jquery';
 import _ from 'lodash';
 import moment from 'moment';
 import kbn from 'grafana/app/core/utils/kbn';
-import { tickStep } from 'grafana/app/core/utils/ticks';
 import { appEvents, coreModule } from 'grafana/app/core/core';
 import GraphTooltip from './graph_tooltip';
 import { ThresholdManager } from './threshold_manager';

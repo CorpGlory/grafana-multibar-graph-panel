@@ -1,6 +1,6 @@
 
 import _ from 'lodash';
-import TimeSeries from 'grafana/app/core/time_series2';
+import TimeSeries from './vendor/grafana/time_series2';
 import colors from './vendor/grafana/colors';
 
 export class DataProcessor {
