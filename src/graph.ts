@@ -199,12 +199,12 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
 
         // Populate element
         let options: any = buildFlotOptions(panel);
+        sortedSeries = sortSeries(data, panel);
         prepareXAxis(options, panel);
         configureYAxisOptions(data, options);
         thresholdManager.addFlotOptions(options, panel);
         eventManager.addFlotEvents(annotations, options);
 
-        sortedSeries = sortSeries(data, panel);
         callPlot(options, true);
       }
 
