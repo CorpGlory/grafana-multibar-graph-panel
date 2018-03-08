@@ -9,9 +9,7 @@ Support of Grafana 5.0 is priority.
 
 # Screenshots
 
-![Side-by-side bars enabled](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/dist/screenshots/sideBySideEnabled.png)
-
-![Side-by-side bars disabled](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/dist/screenshots/sideBySideDisabled.png)
+![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/dist/screenshots/screenshot-1.png)
 
 # Build
 
