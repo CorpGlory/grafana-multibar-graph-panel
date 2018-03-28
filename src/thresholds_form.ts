@@ -128,7 +128,7 @@ var template = `
 </div>
 `;
 
-coreModule.directive('graphThresholdForm', function() {
+coreModule.directive('multibarGraphPanelThresholdForm', function() {
   return {
     restrict: 'E',
     template: template,

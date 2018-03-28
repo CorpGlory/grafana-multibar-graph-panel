@@ -117,6 +117,11 @@ class GraphCtrl extends MetricsPanelCtrl {
   constructor($scope, $injector, private annotationsSrv) {
     super($scope, $injector);
 
+    // hack to show alert threshold
+    // visit link to find out why
+    // https://github.com/grafana/grafana/blob/master/public/app/features/alerting/threshold_mapper.ts#L3
+    this.panel.type='graph';
+    
     _.defaults(this.panel, this.panelDefaults);
     _.defaults(this.panel.tooltip, this.panelDefaults.tooltip);
     _.defaults(this.panel.legend, this.panelDefaults.legend);
