@@ -26,3 +26,4 @@ Based on
 * [grafana-graph-panel](https://github.com/CorpGlory/grafana-graph-panel)
 * [@types/grafana](https://github.com/CorpGlory/types-grafana)
 
+Made by [CorpGlory Team](http://corpglory.com/)
