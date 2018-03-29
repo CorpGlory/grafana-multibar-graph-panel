@@ -1,11 +1,10 @@
-# Graph Panel
+# Mutibar Graph Panel
 
-Webpack copy of [Grafana default panel](http://docs.grafana.org/features/panels/graph/). 
-Now you can make your plugins based on graph panel and hack it easier.
+Webpack copy of [Grafana default panel](http://docs.grafana.org/features/panels/graph/) implementing https://github.com/grafana/grafana/issues/870
 
 The plugin is under development. Please goto [Build section](https://github.com/CorpGlory/grafana-multibar-graph-panel#build) to build it from source.
 
-Support of Grafana 5.0 is priority.
+Grafana 5.0 support is priority.
 
 # Screenshots
 
