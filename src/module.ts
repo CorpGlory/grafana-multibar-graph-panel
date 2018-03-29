@@ -120,7 +120,9 @@ class GraphCtrl extends MetricsPanelCtrl {
     // hack to show alert threshold
     // visit link to find out why
     // https://github.com/grafana/grafana/blob/master/public/app/features/alerting/threshold_mapper.ts#L3
-    this.panel.type='graph';
+    // should make it 'corpglory-multibar-graph-panel' before save
+    // https://github.com/CorpGlory/grafana-multibar-graph-panel/issues/6#issuecomment-377238048
+    // this.panel.type='graph';
     
     _.defaults(this.panel, this.panelDefaults);
     _.defaults(this.panel.tooltip, this.panelDefaults.tooltip);

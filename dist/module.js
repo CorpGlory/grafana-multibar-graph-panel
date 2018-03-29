@@ -5211,7 +5211,9 @@ var GraphCtrl = /** @class */ (function (_super) {
         // hack to show alert threshold
         // visit link to find out why
         // https://github.com/grafana/grafana/blob/master/public/app/features/alerting/threshold_mapper.ts#L3
-        _this.panel.type = 'graph';
+        // should make it 'corpglory-multibar-graph-panel' before save
+        // https://github.com/CorpGlory/grafana-multibar-graph-panel/issues/6#issuecomment-377238048
+        // this.panel.type='graph';
         __WEBPACK_IMPORTED_MODULE_5_lodash___default.a.defaults(_this.panel, _this.panelDefaults);
         __WEBPACK_IMPORTED_MODULE_5_lodash___default.a.defaults(_this.panel.tooltip, _this.panelDefaults.tooltip);
         __WEBPACK_IMPORTED_MODULE_5_lodash___default.a.defaults(_this.panel.legend, _this.panelDefaults.legend);
