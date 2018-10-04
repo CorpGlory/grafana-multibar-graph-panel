@@ -335,10 +335,10 @@ The plugin allso adds the following methods to the plot object:
 
                 var c = $.color.parse(o.selection.color);
 
-                ctx.strokeStyle = c.scale('a', 0.8).toString();
+                ctx.strokeStyle = c.scale('a', o.selection.strokeAlpha).toString();
                 ctx.lineWidth = 1;
                 ctx.lineJoin = o.selection.shape;
-                ctx.fillStyle = c.scale('a', 0.4).toString();
+                ctx.fillStyle = c.scale('a', o.selection.fillAlpha).toString();
 
                 var x = Math.min(selection.first.x, selection.second.x) + 0.5,
                     y = Math.min(selection.first.y, selection.second.y) + 0.5,
@@ -369,7 +369,9 @@ The plugin allso adds the following methods to the plot object:
                 mode: null, // one of null, "x", "y" or "xy"
                 color: "#e8cfac",
                 shape: "round", // one of "round", "miter", or "bevel"
-                minSize: 5 // minimum number of pixels
+                minSize: 5, // minimum number of pixels
+                strokeAlpha: 0.8,
+                fillAlpha: 0.4,
             }
         },
         name: 'selection',

@@ -1,25 +1,27 @@
+import GraphTooltip from './graph_tooltip';
+import { ThresholdManager } from './threshold_manager';
+import { convertValuesToHistogram, getSeriesValues } from './histogram';
+
+import $ from 'jquery';
 import './vendor/flot/jquery.flot';
-import './vendor/flot/jquery.flot.time';
 import './vendor/flot/jquery.flot.selection';
-import './vendor/flot/jquery.flot.orderbars';
+import './vendor/flot/jquery.flot.time';
 import './vendor/flot/jquery.flot.stack';
 import './vendor/flot/jquery.flot.stackpercent';
 import './vendor/flot/jquery.flot.fillbelow';
 import './vendor/flot/jquery.flot.crosshair';
 import './vendor/flot/jquery.flot.dashes';
 import './vendor/flot/jquery.flot.events';
+import './vendor/flot/jquery.flot.orderbars';
 import { EventManager } from './vendor/grafana/event_manager';
 import { updateLegendValues } from './vendor/grafana/time_series2';
 import { tickStep } from './vendor/grafana/ticks';
 
-import * as $ from 'jquery';
-import _ from 'lodash';
-import moment from 'moment';
 import kbn from 'grafana/app/core/utils/kbn';
 import { appEvents, coreModule } from 'grafana/app/core/core';
-import GraphTooltip from './graph_tooltip';
-import { ThresholdManager } from './threshold_manager';
-import { convertValuesToHistogram, getSeriesValues } from './histogram';
+
+import _ from 'lodash';
+import moment from 'moment';
 
 /** @ngInject **/
 function graphDirective(timeSrv, popoverSrv, contextSrv) {

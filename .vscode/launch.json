@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:3000/dashboard/new",
+      "sourceMaps": true,
+      "pathMapping": {
+        "/public/plugins/corpglory-multibar-graph-panel": "${workspaceFolder}/dist"
+      },
+      "webRoot": "${workspaceFolder}",
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/src/*"
+      }
+    }
+  ]
+}
