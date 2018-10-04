@@ -52,7 +52,6 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
           plot = null;
         }
       });
-
       /**
        * Split graph rendering into two parts.
        * First, calculate series stats in buildFlotPairs() function. Then legend rendering started
@@ -224,6 +223,7 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
       }
 
       function prepareXAxis(options, panel) {
+        console.log(panel)
         switch (panel.xaxis.mode) {
           case 'series': {
             options.series.bars.barWidth = 0.7;
