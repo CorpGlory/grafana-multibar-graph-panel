@@ -1,6 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
-import $ from 'jquery';
+import 'jquery';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 var module = angular.module('grafana.directives');
