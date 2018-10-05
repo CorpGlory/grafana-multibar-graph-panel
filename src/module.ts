@@ -1,6 +1,6 @@
 
-import './graph';
-import './legend';
+import { GraphRenderer } from './graph_renderer';
+import { GraphLegend } from './graph_legend';
 import './series_overrides_ctrl';
 import './thresholds_form';
 
@@ -11,7 +11,9 @@ import { MetricsPanelCtrl, alertTab } from 'grafana/app/plugins/sdk';
 import { DataProcessor } from './data_processor';
 import { axesEditorComponent } from './axes_editor';
 
-class MultibarGraphCtrl extends MetricsPanelCtrl {
+import $ from 'jquery';
+
+class GraphCtrl extends MetricsPanelCtrl {
   static template = template;
 
   hiddenSeries: any = {};
@@ -27,6 +29,9 @@ class MultibarGraphCtrl extends MetricsPanelCtrl {
   colors: any = [];
   subTabIndex: number;
   processor: DataProcessor;
+
+  private _graphRenderer: GraphRenderer;
+  private _graphLegend: GraphLegend;
 
   panelDefaults = {
     // datasource name, null = default datasource
@@ -114,7 +119,7 @@ class MultibarGraphCtrl extends MetricsPanelCtrl {
   };
 
   /** @ngInject */
-  constructor($scope, $injector, private annotationsSrv) {
+  constructor($scope, $injector, private annotationsSrv, private popoverSrv, private contextSrv) {
     super($scope, $injector);
 
     // hack to show alert threshold
@@ -137,6 +142,15 @@ class MultibarGraphCtrl extends MetricsPanelCtrl {
     this.events.on('data-snapshot-load', this.onDataSnapshotLoad.bind(this));
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('init-panel-actions', this.onInitPanelActions.bind(this));
+  }
+
+  link(scope, elem, attrs, ctrl) {
+    var $graphElem = $(elem[0]).find('#multibar-graph-panel');
+    var $legendElem = $(elem[0]).find('#multibar-graph-legend');
+    this._graphRenderer = new GraphRenderer(
+      $graphElem, this.timeSrv, this.popoverSrv, this.contextSrv, this.$scope
+    );
+    this._graphLegend = new GraphLegend($legendElem, this.popoverSrv, this.$scope);
   }
 
   onInitEditMode() {
@@ -228,7 +242,7 @@ class MultibarGraphCtrl extends MetricsPanelCtrl {
     );
   }
 
-  onRender() {
+  onRender(data) {
     if (!this.seriesList) {
       return;
     }
@@ -240,6 +254,9 @@ class MultibarGraphCtrl extends MetricsPanelCtrl {
         this.panel.yaxes[series.yaxis - 1].format = series.unit;
       }
     }
+
+    this._graphLegend.render();
+    this._graphRenderer.render(data);
   }
 
   changeSeriesColor(series, color) {
@@ -342,4 +359,4 @@ class MultibarGraphCtrl extends MetricsPanelCtrl {
   }
 }
 
-export { MultibarGraphCtrl, MultibarGraphCtrl as PanelCtrl };
+export { GraphCtrl, GraphCtrl as PanelCtrl };
