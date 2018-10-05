@@ -2,7 +2,7 @@ import GraphTooltip from './graph_tooltip';
 import { ThresholdManager } from './threshold_manager';
 import { convertValuesToHistogram, getSeriesValues } from './histogram';
 
-import 'jquery';
+import $ from 'jquery';
 import './vendor/flot/jquery.flot';
 import './vendor/flot/jquery.flot.selection';
 import './vendor/flot/jquery.flot.time';
@@ -24,7 +24,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 /** @ngInject **/
-function graphDirective(timeSrv, popoverSrv, contextSrv) {
+function multibarGraphDirective(timeSrv, popoverSrv, contextSrv) {
   return {
     restrict: 'A',
     template: '',
@@ -727,4 +727,4 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
   };
 }
 
-coreModule.directive('grafanaMultibarGraph', graphDirective);
+coreModule.directive('grafanaMultibarGraph', multibarGraphDirective);

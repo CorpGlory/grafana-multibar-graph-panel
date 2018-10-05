@@ -1,4 +1,4 @@
-import 'jquery';
+import $ from 'jquery';
 import _ from 'lodash';
 
 export class ThresholdManager {

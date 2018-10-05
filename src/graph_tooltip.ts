@@ -1,7 +1,8 @@
-import 'jquery';
+import $ from 'jquery';
 import { appEvents } from 'grafana/app/core/core';
 
 // TODO: function -> class
+
 export default function GraphTooltip(elem, dashboard, scope, getSeriesFn) {
   var self = this;
   var ctrl = scope.ctrl;
