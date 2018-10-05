@@ -1,5 +1,4 @@
-import './vendor/flot/jquery.flot';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import _ from 'lodash';
 
 export class ThresholdManager {

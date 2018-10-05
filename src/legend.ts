@@ -1,11 +1,11 @@
 import angular from 'angular';
 import _ from 'lodash';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 var module = angular.module('grafana.directives');
 
-module.directive('graphLegend', function(popoverSrv, $timeout) {
+module.directive('multibarGraphLegend', function(popoverSrv, $timeout) {
   return {
     link: function(scope: any, elem) {
       var firstRender = true;

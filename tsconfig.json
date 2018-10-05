@@ -20,8 +20,14 @@
     "noImplicitThis": false,
     "noImplicitUseStrict": false,
     "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "baseUrl": "public"
+    "noUnusedLocals": false,
+    "baseUrl": "./src",
+    "allowUnreachableCode": true,
+    "paths": {
+      "@": [
+        "."
+      ]
+    }
   },
   "include": [
     "./src/**/*.ts"

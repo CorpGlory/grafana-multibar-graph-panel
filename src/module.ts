@@ -11,7 +11,7 @@ import { MetricsPanelCtrl, alertTab } from 'grafana/app/plugins/sdk';
 import { DataProcessor } from './data_processor';
 import { axesEditorComponent } from './axes_editor';
 
-class GraphCtrl extends MetricsPanelCtrl {
+class MultibarGraphCtrl extends MetricsPanelCtrl {
   static template = template;
 
   hiddenSeries: any = {};
@@ -342,4 +342,4 @@ class GraphCtrl extends MetricsPanelCtrl {
   }
 }
 
-export { GraphCtrl, GraphCtrl as PanelCtrl };
+export { MultibarGraphCtrl, MultibarGraphCtrl as PanelCtrl };

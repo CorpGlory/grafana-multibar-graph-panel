@@ -1,4 +1,3 @@
-
 import coreModule from 'grafana/app/core/core_module';
 
 export class ThresholdFormCtrl {
