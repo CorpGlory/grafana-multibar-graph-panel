@@ -39,7 +39,7 @@ function multibarGraphDirective(timeSrv, popoverSrv, contextSrv) {
       var panelWidth = 0;
       var eventManager = new EventManager(ctrl);
       var thresholdManager = new ThresholdManager(ctrl);
-      var tooltip = new GraphTooltip(elem, dashboard, scope, function() {
+      var tooltip = new GraphTooltip(elem, dashboard, scope, () => {
         return sortedSeries;
       });
 
@@ -88,6 +88,7 @@ function multibarGraphDirective(timeSrv, popoverSrv, contextSrv) {
             return;
           }
 
+          console.log('tooltip show')
           tooltip.show(evt.pos);
         },
         scope
