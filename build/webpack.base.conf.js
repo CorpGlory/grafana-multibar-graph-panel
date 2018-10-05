@@ -43,13 +43,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /jquery\.flot\.(?!events)/,
-        loaders: [
-          'imports-loader?jQuery=jquery'
-        ]
-      },
-      {
-        test: /jquery\.flot\.events/,
+        test: /jquery\.flot/,
         loaders: [
           'imports-loader?jQuery=jquery,lodash=lodash,angular=angular,tetherDrop=tether-drop'
         ]
