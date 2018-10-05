@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "Alexey Velikiy",
   "license": "MIT",
-  "repository": "https://github.com/CorpGlory/grafana-graph-panel",
+  "repository": "https://github.com/CorpGlory/grafana-multibar-graph-panel",
   "devDependencies": {
     "@types/angular": "^1.6.43",
     "@types/flot": "0.0.31",
