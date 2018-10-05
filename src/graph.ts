@@ -2,7 +2,7 @@ import GraphTooltip from './graph_tooltip';
 import { ThresholdManager } from './threshold_manager';
 import { convertValuesToHistogram, getSeriesValues } from './histogram';
 
-import $ from 'jquery';
+import 'jquery';
 import './vendor/flot/jquery.flot';
 import './vendor/flot/jquery.flot.selection';
 import './vendor/flot/jquery.flot.time';
@@ -223,7 +223,6 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
       }
 
       function prepareXAxis(options, panel) {
-        console.log(panel)
         switch (panel.xaxis.mode) {
           case 'series': {
             options.series.bars.barWidth = 0.7;
@@ -728,4 +727,4 @@ function graphDirective(timeSrv, popoverSrv, contextSrv) {
   };
 }
 
-coreModule.directive('grafanaGraph', graphDirective);
+coreModule.directive('grafanaMultibarGraph', graphDirective);
