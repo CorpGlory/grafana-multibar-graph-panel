@@ -485,8 +485,7 @@ export class GraphRenderer {
 
     let maxTicks = this.panelWidth / 100;
     let groupsAmount = (max - min) / minTimeStep;
-    let ticks = Math.min(maxTicks, groupsAmount);
-    ticks = Math.ceil(ticks);
+    let ticks = this._getTicks(groupsAmount, maxTicks, max, minTimeStep);
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
@@ -498,6 +497,26 @@ export class GraphRenderer {
       ticks: ticks,
       timeformat: this._timeFormat(ticks, min, max),
     };
+  }
+
+  private _getTicks(groupsAmount: number, maxTicks: number, rangeTo: number, minTimeStep: number) {
+    let ticks;
+    if(groupsAmount <= maxTicks &&
+      this.sortedSeries.length > 0 &&
+      this.sortedSeries[0].datapoints.length > 0
+    ) {
+      ticks = [];
+
+      const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
+      let tick = firstGroupTimestamp;
+      while(tick <= rangeTo) {
+        ticks.push(tick);
+        tick += minTimeStep;
+      }
+      return ticks;
+    }
+
+    return Math.ceil(maxTicks);
   }
 
   private _addXSeriesAxis() {
@@ -569,7 +588,7 @@ export class GraphRenderer {
         return [tickIndex + 1, point[1]];
       });
     });
-    ticks = _.flatten(ticks); 
+    ticks = _.flatten(ticks);
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
@@ -732,8 +751,12 @@ export class GraphRenderer {
 
   private _timeFormat(ticks, min, max) {
     if (min && max && ticks) {
+      let ticksAmount = ticks;
+      if(_.isArray(ticks)) {
+        ticksAmount = ticks.length;
+      }
       var range = max - min;
-      var secPerTick = range / ticks / 1000;
+      var secPerTick = range / ticksAmount / 1000;
       var oneDay = 86400000;
       var oneYear = 31536000000;
 
