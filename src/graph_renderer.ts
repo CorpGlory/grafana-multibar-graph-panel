@@ -335,11 +335,12 @@ export class GraphRenderer {
         break;
       }
       default: {
-        this.flotOptions.series.bars.barWidth = this._getMinTimeStepOfSeries(this.data) / 1.5;
+        let minTimeStep = this._getMinTimeStepOfSeries(this.data);
+        this.flotOptions.series.bars.barWidth = minTimeStep / 1.5;
         if(this._shouldDisplaySideBySide()) {
           this._displaySideBySide(this.sortedSeries, this.flotOptions);
         }
-        this._addTimeAxis();
+        this._addTimeAxis(minTimeStep);
         break;
       }
     }
@@ -478,10 +479,13 @@ export class GraphRenderer {
     }
   }
 
-  private _addTimeAxis() {
-    var ticks = this.panelWidth / 100;
-    var min = _.isUndefined(this.ctrl.range.from) ? null : this.ctrl.range.from.valueOf();
-    var max = _.isUndefined(this.ctrl.range.to) ? null : this.ctrl.range.to.valueOf();
+  private _addTimeAxis(minTimeStep: number) {
+    let min = _.isUndefined(this.ctrl.range.from) ? null : this.ctrl.range.from.valueOf();
+    let max = _.isUndefined(this.ctrl.range.to) ? null : this.ctrl.range.to.valueOf();
+
+    let maxTicks = this.panelWidth / 100;
+    let groupsAmount = (max - min) / minTimeStep;
+    let ticks = this._getTicks(groupsAmount, maxTicks, max, minTimeStep);
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
@@ -493,6 +497,26 @@ export class GraphRenderer {
       ticks: ticks,
       timeformat: this._timeFormat(ticks, min, max),
     };
+  }
+
+  private _getTicks(groupsAmount: number, maxTicks: number, rangeTo: number, minTimeStep: number) {
+    let ticks;
+    if(groupsAmount <= maxTicks &&
+      this.sortedSeries.length > 0 &&
+      this.sortedSeries[0].datapoints.length > 0
+    ) {
+      ticks = [];
+
+      const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
+      let tick = firstGroupTimestamp;
+      while(tick <= rangeTo) {
+        ticks.push(tick);
+        tick += minTimeStep;
+      }
+      return ticks;
+    }
+
+    return Math.ceil(maxTicks);
   }
 
   private _addXSeriesAxis() {
@@ -564,7 +588,7 @@ export class GraphRenderer {
         return [tickIndex + 1, point[1]];
       });
     });
-    ticks = _.flatten(ticks); 
+    ticks = _.flatten(ticks);
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
@@ -727,8 +751,12 @@ export class GraphRenderer {
 
   private _timeFormat(ticks, min, max) {
     if (min && max && ticks) {
+      let ticksAmount = ticks;
+      if(_.isArray(ticks)) {
+        ticksAmount = ticks.length;
+      }
       var range = max - min;
-      var secPerTick = range / ticks / 1000;
+      var secPerTick = range / ticksAmount / 1000;
       var oneDay = 86400000;
       var oneYear = 31536000000;
 
