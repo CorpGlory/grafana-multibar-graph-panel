@@ -335,11 +335,12 @@ export class GraphRenderer {
         break;
       }
       default: {
-        this.flotOptions.series.bars.barWidth = this._getMinTimeStepOfSeries(this.data) / 1.5;
+        let minTimeStep = this._getMinTimeStepOfSeries(this.data);
+        this.flotOptions.series.bars.barWidth = minTimeStep / 1.5;
         if(this._shouldDisplaySideBySide()) {
           this._displaySideBySide(this.sortedSeries, this.flotOptions);
         }
-        this._addTimeAxis();
+        this._addTimeAxis(minTimeStep);
         break;
       }
     }
@@ -478,10 +479,14 @@ export class GraphRenderer {
     }
   }
 
-  private _addTimeAxis() {
-    var ticks = this.panelWidth / 100;
-    var min = _.isUndefined(this.ctrl.range.from) ? null : this.ctrl.range.from.valueOf();
-    var max = _.isUndefined(this.ctrl.range.to) ? null : this.ctrl.range.to.valueOf();
+  private _addTimeAxis(minTimeStep: number) {
+    let min = _.isUndefined(this.ctrl.range.from) ? null : this.ctrl.range.from.valueOf();
+    let max = _.isUndefined(this.ctrl.range.to) ? null : this.ctrl.range.to.valueOf();
+
+    let maxTicks = this.panelWidth / 100;
+    let groupsAmount = (max - min) / minTimeStep;
+    let ticks = Math.min(maxTicks, groupsAmount);
+    ticks = Math.ceil(ticks);
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
