@@ -27,7 +27,8 @@ module.exports = {
   ],
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'partials/*' }
+      { from: 'partials/*' },
+      { from: '../README.md' }
     ])
   ],
   resolve: {
