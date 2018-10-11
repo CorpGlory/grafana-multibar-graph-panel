@@ -40,16 +40,13 @@ export class GraphRenderer {
   private eventManager;
   private flotOptions: any = {}
   private annotations: any[];
-  private scope: any;
   private _graphMousePosition: any;
 
-  constructor (private $elem, private timeSrv, private popoverSrv, private contextSrv, scope) {
+  constructor (private $elem, private timeSrv, private contextSrv, scope) {
     this.$elem = $elem;
     this.ctrl = scope.ctrl;
     this.dashboard = this.ctrl.dashboard;
     this.panel = this.ctrl.panel;
-
-    this.scope = scope;
 
     this.annotations = [];
     this.panelWidth = 0;
@@ -82,14 +79,14 @@ export class GraphRenderer {
         return;
       }
 
-      if ((selectionEvent.ctrlKey || selectionEvent.metaKey) && contextSrv.isEditor) {
+      if ((selectionEvent.ctrlKey || selectionEvent.metaKey) && this.contextSrv.isEditor) {
         // Add annotation
         setTimeout(() => {
           this.eventManager.updateTime(selectionEvent.xaxis);
         }, 100);
       } else {
-        scope.$apply(function() {
-          timeSrv.setTime({
+        scope.$apply(() => {
+          this.timeSrv.setTime({
             from: moment.utc(selectionEvent.xaxis.from),
             to: moment.utc(selectionEvent.xaxis.to),
           });
@@ -103,7 +100,7 @@ export class GraphRenderer {
         return;
       }
 
-      if ((flotEvent.ctrlKey || flotEvent.metaKey) && contextSrv.isEditor) {
+      if ((flotEvent.ctrlKey || flotEvent.metaKey) && this.contextSrv.isEditor) {
         // Skip if range selected (added in "plotselected" event handler)
         let isRangeSelection = flotEvent.x !== flotEvent.x1;
         if (!isRangeSelection) {
