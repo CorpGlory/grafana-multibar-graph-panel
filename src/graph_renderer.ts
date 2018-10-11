@@ -40,16 +40,13 @@ export class GraphRenderer {
   private eventManager;
   private flotOptions: any = {}
   private annotations: any[];
-  private scope: any;
   private _graphMousePosition: any;
 
-  constructor (private $elem, private timeSrv, private popoverSrv, private contextSrv, scope) {
+  constructor (private $elem, private timeSrv, private contextSrv, scope) {
     this.$elem = $elem;
     this.ctrl = scope.ctrl;
     this.dashboard = this.ctrl.dashboard;
     this.panel = this.ctrl.panel;
-
-    this.scope = scope;
 
     this.annotations = [];
     this.panelWidth = 0;
@@ -82,14 +79,14 @@ export class GraphRenderer {
         return;
       }
 
-      if ((selectionEvent.ctrlKey || selectionEvent.metaKey) && contextSrv.isEditor) {
+      if ((selectionEvent.ctrlKey || selectionEvent.metaKey) && this.contextSrv.isEditor) {
         // Add annotation
         setTimeout(() => {
           this.eventManager.updateTime(selectionEvent.xaxis);
         }, 100);
       } else {
-        scope.$apply(function() {
-          timeSrv.setTime({
+        scope.$apply(() => {
+          this.timeSrv.setTime({
             from: moment.utc(selectionEvent.xaxis.from),
             to: moment.utc(selectionEvent.xaxis.to),
           });
@@ -103,7 +100,7 @@ export class GraphRenderer {
         return;
       }
 
-      if ((flotEvent.ctrlKey || flotEvent.metaKey) && contextSrv.isEditor) {
+      if ((flotEvent.ctrlKey || flotEvent.metaKey) && this.contextSrv.isEditor) {
         // Skip if range selected (added in "plotselected" event handler)
         let isRangeSelection = flotEvent.x !== flotEvent.x1;
         if (!isRangeSelection) {
@@ -336,9 +333,12 @@ export class GraphRenderer {
       }
       default: {
         let minTimeStep = this._getMinTimeStepOfSeries(this.data);
+        if(minTimeStep >= (this._timeMax - this._timeMin)) {
+          minTimeStep = this._timeMax - this._timeMin
+        }
         this.flotOptions.series.bars.barWidth = minTimeStep / 1.5;
         if(this._shouldDisplaySideBySide()) {
-          this._displaySideBySide(this.sortedSeries, this.flotOptions);
+          this._displaySideBySide(this.flotOptions);
         }
         this._addTimeAxis(minTimeStep);
         break;
@@ -350,8 +350,8 @@ export class GraphRenderer {
     return this.panel.displayBarsSideBySide && !this.panel.stack && this.panel.xaxis.mode === 'time';
   }
 
-  private _displaySideBySide(sortedSeries, options) {
-    let barsSeries = _.filter(sortedSeries, series => series.bars && series.bars.show !== false);
+  private _displaySideBySide(options) {
+    let barsSeries = _.filter(this.sortedSeries, series => series.bars && series.bars.show !== false);
     let barWidth = options.series.bars.barWidth / barsSeries.length;
     for(let i = 0; i < barsSeries.length; ++i) {
       barsSeries[i].bars.order = i;
@@ -480,12 +480,14 @@ export class GraphRenderer {
   }
 
   private _addTimeAxis(minTimeStep: number) {
-    let min = _.isUndefined(this.ctrl.range.from) ? null : this.ctrl.range.from.valueOf();
-    let max = _.isUndefined(this.ctrl.range.to) ? null : this.ctrl.range.to.valueOf();
+    let min = this._timeMin;
+    let max = this._timeMax;
 
-    let maxTicks = this.panelWidth / 100;
-    let groupsAmount = (max - min) / minTimeStep;
-    let ticks = this._getTicks(groupsAmount, maxTicks, max, minTimeStep);
+    let ticks: any = this.panelWidth / 100;
+    if(this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
+      let groupsAmount = (max - min) / minTimeStep;
+      ticks = this._getTicks(groupsAmount, ticks, max, minTimeStep);
+    }
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
@@ -499,24 +501,18 @@ export class GraphRenderer {
     };
   }
 
-  private _getTicks(groupsAmount: number, maxTicks: number, rangeTo: number, minTimeStep: number) {
-    let ticks;
-    if(groupsAmount <= maxTicks &&
-      this.sortedSeries.length > 0 &&
-      this.sortedSeries[0].datapoints.length > 0
-    ) {
-      ticks = [];
+  private _getTicks(groupsAmount: number, maxTicks: number, rangeTo: number, timeStep: number) {
+    let ticks = [];
 
-      const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
-      let tick = firstGroupTimestamp;
-      while(tick <= rangeTo) {
-        ticks.push(tick);
-        tick += minTimeStep;
-      }
-      return ticks;
+    let groups = Math.max(this.sortedSeries[0].datapoints.length, groupsAmount);
+    let multiplier = Math.floor(groups / maxTicks) || 1;
+    const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
+    let tick = firstGroupTimestamp;
+    while(tick <= rangeTo) {
+      ticks.push(tick);
+      tick += timeStep * multiplier;
     }
-
-    return Math.ceil(maxTicks);
+    return ticks;
   }
 
   private _addXSeriesAxis() {
@@ -776,6 +772,14 @@ export class GraphRenderer {
     }
 
     return '%H:%M';
+  }
+
+  private get _timeMin() {
+    return _.isUndefined(this.ctrl.range.from) ? null : this.ctrl.range.from.valueOf();
+  }
+
+  private get _timeMax() {
+    return _.isUndefined(this.ctrl.range.to) ? null : this.ctrl.range.to.valueOf();
   }
 
 }
