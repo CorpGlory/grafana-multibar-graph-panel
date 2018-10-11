@@ -504,7 +504,8 @@ export class GraphRenderer {
   private _getTicks(groupsAmount: number, maxTicks: number, rangeTo: number, timeStep: number) {
     let ticks = [];
 
-    let multiplier = Math.floor(Math.max(this.sortedSeries[0].datapoints.length, groupsAmount) / maxTicks) || 1
+    let groups = Math.max(this.sortedSeries[0].datapoints.length, groupsAmount);
+    let multiplier = Math.floor(groups / maxTicks) || 1;
     const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
     let tick = firstGroupTimestamp;
     while(tick <= rangeTo) {
