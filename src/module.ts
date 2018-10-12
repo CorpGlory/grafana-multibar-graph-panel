@@ -115,7 +115,8 @@ class GraphCtrl extends MetricsPanelCtrl {
     // other style overrides
     seriesOverrides: [],
     thresholds: [],
-    displayBarsSideBySide: false
+    displayBarsSideBySide: false,
+    labelAlign: 'left'
   };
 
   /** @ngInject */

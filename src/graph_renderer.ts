@@ -486,7 +486,14 @@ export class GraphRenderer {
     let ticks: any = this.panelWidth / 100;
     if(this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
       let groupsAmount = (max - min) / minTimeStep;
-      ticks = this._getTicks(groupsAmount, ticks, max, minTimeStep);
+      ticks = this._generateTicks(groupsAmount, ticks, max, minTimeStep);
+
+      const format = this._timeFormat(ticks, min, max);
+      let formatDate = ($.plot as any).formatDate;
+      ticks = _.map(ticks, tick => [
+        tick[0],
+        formatDate(new Date(tick[1]), format)
+      ]);
     }
 
     this.flotOptions.xaxis = {
@@ -496,20 +503,28 @@ export class GraphRenderer {
       min: min,
       max: max,
       label: 'Datetime',
-      ticks: ticks,
-      timeformat: this._timeFormat(ticks, min, max),
+      ticks
     };
   }
 
-  private _getTicks(groupsAmount: number, maxTicks: number, rangeTo: number, timeStep: number) {
+  private _generateTicks(groupsAmount: number, maxTicks: number, rangeTo: number, timeStep: number) {
     let ticks = [];
 
     let groups = Math.max(this.sortedSeries[0].datapoints.length, groupsAmount);
     let multiplier = Math.floor(groups / maxTicks) || 1;
     const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
-    let tick = firstGroupTimestamp;
+    let offset;
+    if(this.panel.labelAlign === 'left') {
+      offset = 0;
+    } else if(this.panel.labelAlign === 'center') {
+      offset = this.flotOptions.series.bars.barWidth / 2;
+    } else {
+      offset = this.flotOptions.series.bars.barWidth;
+    }
+
+    let tick = firstGroupTimestamp + offset;
     while(tick <= rangeTo) {
-      ticks.push(tick);
+      ticks.push([tick, tick - offset]);
       tick += timeStep * multiplier;
     }
     return ticks;
