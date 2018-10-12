@@ -83,8 +83,19 @@
 					<select class="gf-form-input max-width-9" ng-model="ctrl.panel.nullPointMode" ng-options="f for f in ['connected', 'null', 'null as zero']" ng-change="ctrl.render()"></select>
 				</div>
 			</div>
-		</div>
-	</div>
+    </div>
+    
+    <div class="section gf-form-group">
+        <h5 class="section-heading">Labels</h5>
+        <div class="gf-form">
+          <label class="gf-form-label width-7">Align</label>
+          <div class="gf-form-select-wrapper">
+            <select class="gf-form-input max-width-9" ng-model="ctrl.panel.labelAlign" ng-options="f for f in ['left', 'center', 'right']" ng-change="ctrl.render()"></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 	<div class="edit-tab-content" ng-if="ctrl.subTabIndex === 1">
 		<div class="gf-form-group">
