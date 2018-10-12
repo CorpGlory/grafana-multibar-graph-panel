@@ -487,14 +487,14 @@ export class GraphRenderer {
     if(this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
       let groupsAmount = (max - min) / minTimeStep;
       ticks = this._generateTicks(groupsAmount, ticks, max, minTimeStep);
-    }
 
-    const format = this._timeFormat(ticks, min, max);
-    let formatDate = ($.plot as any).formatDate;
-    ticks = ticks.map(tick => [
-      tick[0],
-      formatDate(new Date(tick[1]), format)
-    ]);
+      const format = this._timeFormat(ticks, min, max);
+      let formatDate = ($.plot as any).formatDate;
+      ticks = _.map(ticks, tick => [
+        tick[0],
+        formatDate(new Date(tick[1]), format)
+      ]);
+    }
 
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
