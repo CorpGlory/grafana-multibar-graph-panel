@@ -484,16 +484,17 @@ export class GraphRenderer {
     let max = this._timeMax;
 
     let ticks: any = this.panelWidth / 100;
-    if(this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
+    if(this.panel.bars && this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
       let groupsAmount = (max - min) / minTimeStep;
-      ticks = this._generateTicks(groupsAmount, ticks, max, minTimeStep);
-
-      const format = this._timeFormat(ticks, min, max);
-      let formatDate = ($.plot as any).formatDate;
-      ticks = _.map(ticks, tick => [
-        tick[0],
-        formatDate(new Date(tick[1]), format)
-      ]);
+      let generatedTicks = this._generateTicks(groupsAmount, ticks, max, minTimeStep);
+      if(generatedTicks.length !== 0) {
+        const format = this._timeFormat(ticks, min, max);
+        let formatDate = ($.plot as any).formatDate;
+        ticks = _.map(generatedTicks, tick => [
+          tick[0],
+          formatDate(new Date(tick[1]), format)
+        ]);
+      }
     }
 
     this.flotOptions.xaxis = {
