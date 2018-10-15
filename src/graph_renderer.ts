@@ -484,12 +484,17 @@ export class GraphRenderer {
     let max = this._timeMax;
 
     let ticks: any = this.panelWidth / 100;
+    console.log('Sorted series length: ', this.sortedSeries.length);
+    console.log('Sorted serie datapoints: ', this.sortedSeries[0].datapoints.length)
     if(this.panel.bars && this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
       let groupsAmount = (max - min) / minTimeStep;
-      let generatedTicks = this._generateTicks(groupsAmount, ticks, max, minTimeStep);
+      let generatedTicks = this._generateTicks(groupsAmount, ticks, min, max, minTimeStep);
       if(generatedTicks.length !== 0) {
-        const format = this._timeFormat(ticks, min, max);
-        let formatDate = ($.plot as any).formatDate;
+        console.log('Time format');
+        console.log('Ticks amount: ', generatedTicks.length);
+
+        const format = this._timeFormat(generatedTicks, min, max);
+        const formatDate = ($.plot as any).formatDate;
         ticks = _.map(generatedTicks, tick => [
           tick[0],
           formatDate(new Date(tick[1]), format)
@@ -497,18 +502,26 @@ export class GraphRenderer {
       }
     }
 
+    console.log('Final ticks: ', ticks);
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
       show: this.panel.xaxis.show,
       mode: 'time',
-      min: min,
-      max: max,
+      min,
+      max,
       label: 'Datetime',
       ticks
     };
   }
 
-  private _generateTicks(groupsAmount: number, maxTicks: number, rangeTo: number, timeStep: number) {
+  private _generateTicks(groupsAmount: number, maxTicks: number, rangeFrom: number, rangeTo: number, timeStep: number) {
+    console.log('Ticks generator');
+    console.log('Groups amount: ', groupsAmount);
+    console.log('Max ticks: ', maxTicks);
+    console.log('From: ', rangeFrom);
+    console.log('To: ', rangeTo);
+    console.log('Time step: ', timeStep);
+
     let ticks = [];
 
     let groups = Math.max(this.sortedSeries[0].datapoints.length, groupsAmount);
@@ -524,8 +537,12 @@ export class GraphRenderer {
     }
 
     let tick = firstGroupTimestamp + offset;
+    let shiftedTick;
     while(tick <= rangeTo) {
-      ticks.push([tick, tick - offset]);
+      shiftedTick = tick - offset;
+      if(shiftedTick >= rangeFrom) {
+        ticks.push([tick, shiftedTick]);
+      }
       tick += timeStep * multiplier;
     }
     return ticks;
