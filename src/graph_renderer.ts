@@ -500,6 +500,7 @@ export class GraphRenderer {
           const secondsInMinute = 60;
           const msInSecond = 1000;
           let date = new Date(tick[1]);
+          // TODO: use UTC only if dashboard timezone is UTC
           const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * secondsInMinute * msInSecond);
           return [
             tick[0],
