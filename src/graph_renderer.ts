@@ -496,10 +496,16 @@ export class GraphRenderer {
 
         const format = this._timeFormat(generatedTicks, min, max);
         const formatDate = ($.plot as any).formatDate;
-        ticks = _.map(generatedTicks, tick => [
-          tick[0],
-          formatDate(new Date(tick[1]), format)
-        ]);
+        ticks = _.map(generatedTicks, tick => {
+          const secondsInMinute = 60;
+          const msInSecond = 1000;
+          let date = new Date(tick[1]);
+          const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * secondsInMinute * msInSecond);
+          return [
+            tick[0],
+            formatDate(utcDate, format)
+          ]
+        });
       }
     }
     console.log(this.dashboard.getTimezone());
@@ -556,6 +562,8 @@ export class GraphRenderer {
     } else {
       offset = this.flotOptions.series.bars.barWidth;
     }
+    console.log('Align: ', this.panel.labelAlign);
+    console.log('Offset: ', offset);
 
     let tick = firstGroupTimestamp + offset;
     let shiftedTick;
