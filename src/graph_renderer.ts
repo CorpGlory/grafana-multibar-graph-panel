@@ -485,8 +485,9 @@ export class GraphRenderer {
 
     let ticks: any = this.panelWidth / 100;
     console.log('Sorted series length: ', this.sortedSeries.length);
-    console.log('Sorted serie datapoints: ', this.sortedSeries[0].datapoints.length)
+    
     if(this.panel.bars && this.sortedSeries.length > 0 && this.sortedSeries[0].datapoints.length > 0) {
+      console.log('First serie alias: ', this.sortedSeries[0].alias);
       let groupsAmount = (max - min) / minTimeStep;
       let generatedTicks = this._generateTicks(groupsAmount, ticks, min, max, minTimeStep);
       if(generatedTicks.length !== 0) {
@@ -501,7 +502,7 @@ export class GraphRenderer {
         ]);
       }
     }
-
+    console.log(this.dashboard.getTimezone());
     console.log('Final ticks: ', ticks);
     this.flotOptions.xaxis = {
       timezone: this.dashboard.getTimezone(),
@@ -524,9 +525,29 @@ export class GraphRenderer {
 
     let ticks = [];
 
-    let groups = Math.max(this.sortedSeries[0].datapoints.length, groupsAmount);
+    let seriesInRange = _.map(this.sortedSeries, (serie: any) => 
+      serie.datapoints.filter(
+        datapoint => datapoint[1] >= rangeFrom && datapoint[1] <= rangeTo
+      )
+    );
+
+    let firstGroupTimestamp = Number.MAX_VALUE;
+    let maxDatapoints = 0;
+    _.each(seriesInRange, datapoints => {
+      if(datapoints.length > maxDatapoints) {
+        maxDatapoints = datapoints.length;
+      }
+      _.each(datapoints, datapoint => {
+        if(datapoint[1] < firstGroupTimestamp) {
+          firstGroupTimestamp = datapoint[1];
+        }
+      });
+    });
+    console.log('First group timestamp: ', firstGroupTimestamp);
+    console.log('Max datapoints: ', maxDatapoints);
+
+    let groups = Math.max(maxDatapoints, groupsAmount);
     let multiplier = Math.floor(groups / maxTicks) || 1;
-    const firstGroupTimestamp = this.sortedSeries[0].datapoints[0][1];
     let offset;
     if(this.panel.labelAlign === 'left') {
       offset = 0;
