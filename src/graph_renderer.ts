@@ -533,9 +533,12 @@ export class GraphRenderer {
 
     let ticks = [];
 
+    const shiftedRangeFrom = rangeFrom - this.flotOptions.series.bars.barWidth;
+    const shiftedRangeTo = rangeTo + this.flotOptions.series.bars.barWidth;
     let seriesInRange = _.map(this.sortedSeries, (serie: any) => 
       serie.datapoints.filter(
-        datapoint => datapoint[1] >= rangeFrom && datapoint[1] <= rangeTo
+        datapoint => 
+          datapoint[1] >= shiftedRangeFrom && datapoint[1] <= shiftedRangeTo
       )
     );
 
@@ -571,7 +574,7 @@ export class GraphRenderer {
     let shiftedTick;
     while(tick <= rangeTo) {
       shiftedTick = tick - offset;
-      if(shiftedTick >= rangeFrom) {
+      if(tick >= rangeFrom) {
         ticks.push([tick, shiftedTick]);
       }
       tick += timeStep * multiplier;
