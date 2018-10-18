@@ -75,8 +75,8 @@ export class GraphTooltip {
     if (allSeriesMode) {
       plot.unhighlight();
 
-      var seriesHoverInfo = this._getMultiSeriesPlotHoverInfo(plotData, pos);
       seriesHtml = '';
+      var seriesHoverInfo = this._getMultiSeriesPlotHoverInfo(plotData, pos);
       absoluteTime = this.dashboard.formatDate(seriesHoverInfo.time, tooltipFormat);
 
       // Dynamically reorder the hovercard for the current time point if the
@@ -126,7 +126,8 @@ export class GraphTooltip {
 
       value = series.formatValue(value);
 
-      absoluteTime = this.dashboard.formatDate(item.datapoint[0], tooltipFormat);
+      seriesHoverInfo = this._getMultiSeriesPlotHoverInfo(plotData, pos);
+      absoluteTime = this.dashboard.formatDate(seriesHoverInfo.time, tooltipFormat);
 
       group += '<div class="graph-tooltip-value">' + value + '</div>';
 
