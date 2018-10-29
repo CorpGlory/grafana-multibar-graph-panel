@@ -52,13 +52,14 @@
 			</div>
     </div>
     
+    <div ng-if="ctrl.panel.xaxis.mode === 'time'">
     <!-- custom date formating -->
-    <gf-form-switch class="gf-form" label="Custom Date-Time format" label-class="width-12" checked="ctrl.panel.xaxis.customDateFormatShow" on-change="ctrl.render()"></gf-form-switch>
+      <gf-form-switch class="gf-form" label="Custom Date-Time format" label-class="width-12" checked="ctrl.panel.xaxis.customDateFormatShow" on-change="ctrl.render()"></gf-form-switch>
 
-    <div ng-if="ctrl.panel.xaxis.customDateFormatShow">
-      <input type="text" maxlength="15" class="gf-form-input max-width-20" ng-model="ctrl.panel.xaxis.customDateFormat" ng-change="ctrl.render()" ng-model-onblur>
-      <br>
-      <pre class="gf-form-pre alert alert-info">
+      <div ng-if="ctrl.panel.xaxis.customDateFormatShow">
+        <input type="text" maxlength="15" class="gf-form-input max-width-20" ng-model="ctrl.panel.xaxis.customDateFormat" ng-change="ctrl.render()" ng-model-onblur>
+        <br>
+        <pre class="gf-form-pre alert alert-info">
 Use the input field above to override x-axis time-date display to suit your needs.
 List of supported variables:
   %a: weekday name
@@ -82,6 +83,7 @@ Examples:
 "DoW index: %w" = "DoW index: 1"
 "%y; %m; %d" = "18; 10; 25"
         </pre>
+      </div>
     </div>
 
 		<!-- Series mode -->
