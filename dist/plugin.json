@@ -12,7 +12,7 @@
       "small": "img/icn-graph-panel.svg",
       "large": "img/icn-graph-panel.svg"
     },
-    "version": "0.2.2"
+    "version": "0.2.3"
   },
   "dependencies": {
     "grafanaVersion": "4.6.x 5.x"
