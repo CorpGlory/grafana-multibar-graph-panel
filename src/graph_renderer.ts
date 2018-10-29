@@ -480,6 +480,7 @@ export class GraphRenderer {
   }
 
   private _addTimeAxis(minTimeStep: number) {
+    let format;
     let min = this._timeMin;
     let max = this._timeMax;
 
@@ -493,8 +494,12 @@ export class GraphRenderer {
       if(generatedTicks.length !== 0) {
         console.log('Time format');
         console.log('Ticks amount: ', generatedTicks.length);
-
-        const format = this._timeFormat(generatedTicks, min, max);
+        if(this.panel.xaxis.customDateFormatShow) {
+          format = this.panel.xaxis.customDateFormat;
+        } else {
+          format = this._timeFormat(generatedTicks, min, max);
+        }
+        
         const formatDate = ($.plot as any).formatDate;
         ticks = _.map(generatedTicks, tick => {
           const secondsInMinute = 60;

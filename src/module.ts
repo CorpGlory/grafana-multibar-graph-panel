@@ -62,6 +62,8 @@ class GraphCtrl extends MetricsPanelCtrl {
       name: null,
       values: [],
       buckets: null,
+      customDateFormatShow: false,
+      customDateFormat: ''
     },
     // show/hide lines
     lines: true,
