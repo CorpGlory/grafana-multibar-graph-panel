@@ -494,7 +494,7 @@ export class GraphRenderer {
       if(generatedTicks.length !== 0) {
         console.log('Time format');
         console.log('Ticks amount: ', generatedTicks.length);
-        if (this.panel.xaxis.customDateFormatShow) {
+        if(this.panel.xaxis.customDateFormatShow) {
           format = this.panel.xaxis.customDateFormat;
         } else {
           format = this._timeFormat(generatedTicks, min, max);
