@@ -43,14 +43,48 @@
 
 	<div class="section gf-form-group">
 		<h5 class="section-heading">X-Axis</h5>
-		<gf-form-switch class="gf-form" label="Show" label-class="width-6" checked="ctrl.panel.xaxis.show" on-change="ctrl.render()"></gf-form-switch>
+		<gf-form-switch class="gf-form" label="Show" label-class="width-12" checked="ctrl.panel.xaxis.show" on-change="ctrl.render()"></gf-form-switch>
 
 		<div class="gf-form">
-			<label class="gf-form-label width-6">Mode</label>
+			<label class="gf-form-label width-12">Mode</label>
 			<div class="gf-form-select-wrapper max-width-15">
 				<select class="gf-form-input" ng-model="ctrl.panel.xaxis.mode" ng-options="v as k for (k, v) in ctrl.xAxisModes" ng-change="ctrl.xAxisModeChanged()"> </select>
 			</div>
-		</div>
+    </div>
+    
+    <!-- custom date formating -->
+    <gf-form-switch class="gf-form" label="Custom Date-Time format" label-class="width-12" checked="ctrl.panel.xaxis.customDateFormatShow" on-change="ctrl.render()"></gf-form-switch>
+
+    <div ng-if="ctrl.panel.xaxis.customDateFormatShow">
+      <input type="text" maxlength="15" class="gf-form-input max-width-20" ng-model="ctrl.panel.xaxis.customDateFormat" ng-change="ctrl.render()" ng-model-onblur>
+      <br>
+      <pre class="gf-form-pre alert alert-info">
+(15 characters max)
+
+Use the input field above to override x-axis time-date display to suit your needs.
+List of supported variables:
+  %a: weekday name
+  %b: month name
+  %d: day of month, zero-padded (01-31)
+  %e: day of month, space-padded ( 1-31)
+  %H: hours, 24-hour time, zero-padded (00-23)
+  %I: hours, 12-hour time, zero-padded (01-12)
+  %m: month, zero-padded (01-12)
+  %M: minutes, zero-padded (00-59)
+  %q: quarter (1-4)
+  %S: seconds, zero-padded (00-59)
+  %y: year (two digits)
+  %Y: year (four digits)
+  %p: am/pm
+  %P: AM/PM (uppercase version of %p)
+  %w: weekday as number (0-6, 0 being Sunday)
+
+Examples:
+"%d %b" = "2 Nov"
+"DoW index: %w" = "DoW index: 1"
+"%y; %m; %d" = "18; 10; 25"
+        </pre>
+    </div>
 
 		<!-- Series mode -->
 		<div class="gf-form" ng-if="ctrl.panel.xaxis.mode === 'series'">
