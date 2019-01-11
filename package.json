@@ -1,6 +1,6 @@
 {
   "name": "grafana-multibar-graph-panel",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Webpack copy of Grafana default panel",
   "main": "dist/module",
   "scripts": {
