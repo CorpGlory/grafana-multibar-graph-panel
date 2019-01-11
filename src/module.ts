@@ -258,8 +258,10 @@ class GraphCtrl extends MetricsPanelCtrl {
       }
     }
 
-    this._graphLegend.render();
     this._graphRenderer.render(data);
+    this._graphLegend.render();
+
+    this._graphRenderer.renderPanel();
   }
 
   changeSeriesColor(series, color) {

@@ -140,9 +140,7 @@ export class GraphLegend {
     }
 
     if (this.panel.legend.sort) {
-      this.seriesList = _.sortBy(this.seriesList, function (series) {
-        return series.stats[this.panel.legend.sort];
-      });
+      this.seriesList = _.sortBy(this.seriesList, series => series.stats[this.panel.legend.sort]);
       if (this.panel.legend.sortDesc) {
         this.seriesList = this.seriesList.reverse();
       }
