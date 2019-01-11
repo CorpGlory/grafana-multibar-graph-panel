@@ -8,7 +8,7 @@ Grafana 5.0 support is priority.
 
 # Screenshots
 
-![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/dist/screenshots/screenshot-1.png)
+![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/src/screenshots/screenshot-1.png)
 
 # Build
 

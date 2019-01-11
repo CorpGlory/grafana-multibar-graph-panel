@@ -27,6 +27,9 @@ module.exports = {
   ],
   plugins: [
     new CopyWebpackPlugin([
+      { from: 'plugin.json' },
+      { from: 'img/*' },
+      { from: 'screenshots/*' },
       { from: 'partials/*' },
       { from: '../README.md' }
     ])

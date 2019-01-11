@@ -1,9 +1,6 @@
 package-lock.json
 node_modules
-dist/*
-!dist/screenshots
-!dist/img
-!dist/plugin.json
+dist/
 npm-debug.log
 coverage/
 .aws-config.json
