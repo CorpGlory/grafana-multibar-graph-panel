@@ -1,4 +1,4 @@
-# Mutibar Graph Panel
+# Multibar Graph Panel
 
 Webpack copy of [Grafana default panel](http://docs.grafana.org/features/panels/graph/) implementing https://github.com/grafana/grafana/issues/870
 
