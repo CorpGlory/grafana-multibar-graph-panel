@@ -1,6 +1,5 @@
 package-lock.json
 node_modules
-dist/
 npm-debug.log
 coverage/
 .aws-config.json
