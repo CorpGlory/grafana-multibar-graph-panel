@@ -40,7 +40,7 @@ export class GraphLegend {
       position: 'bottom left',
       targetAttachment: 'top left',
       template:
-        '<series-color-picker series="series" onToggleAxis="toggleAxis" onColorChange="colorSelected"/>',
+        '<series-color-picker-popover series="series" onToggleAxis="toggleAxis" onColorChange="colorSelected"/>',
       openOn: 'hover',
       model: {
         series: series,
