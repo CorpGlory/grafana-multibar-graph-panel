@@ -4,7 +4,7 @@ Webpack copy of [Grafana default panel](http://docs.grafana.org/features/panels/
 
 The plugin is under development. Please goto [Build section](https://github.com/CorpGlory/grafana-multibar-graph-panel#build) to build it from source.
 
-Grafana 5.3.3+ support is priority.
+Supported Grafana versions: 5.3.3+
 
 # Screenshots
 
