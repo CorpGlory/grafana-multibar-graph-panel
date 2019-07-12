@@ -25,4 +25,5 @@ Based on
 * [grafana-graph-panel](https://github.com/CorpGlory/grafana-graph-panel)
 * [@types/grafana](https://github.com/CorpGlory/types-grafana)
 
-Made by [CorpGlory Team](http://corpglory.com/)
+## About CorpGlory Inc.
+The project developed by [CorpGlory Inc.](https://corpglory.com/), a company which provides high quality software development, data visualization, Grafana and monitoring consulting.
