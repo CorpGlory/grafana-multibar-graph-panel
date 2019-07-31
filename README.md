@@ -8,7 +8,7 @@ Supported Grafana versions: 5.3.3+
 
 # Screenshots
 
-![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/src/screenshots/screenshot-1.png)
+![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/raw/master/src/screenshots/screenshot-1.png)
 
 # Build
 
