@@ -1,3 +1,6 @@
+> ## This project is not activly supported. 
+> ### Please use https://github.com/chartwerk/grafana-chartwerk-panel
+
 # Multibar Graph Panel
 
 [![dependencies Status](https://david-dm.org/CorpGlory/grafana-multibar-graph-panel/status.svg)](https://david-dm.org/CorpGlory/grafana-multibar-graph-panel)
