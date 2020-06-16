@@ -23,13 +23,12 @@ npm install
 npm run build
 ```
 
-# Credits
-
-Based on 
+# See also
 
 * [grafana-plugin-template-webpack](https://github.com/CorpGlory/grafana-plugin-template-webpack)
 * [grafana-graph-panel](https://github.com/CorpGlory/grafana-graph-panel)
 * [@types/grafana](https://github.com/CorpGlory/types-grafana)
+* more about Grafana from CorpGlory: https://corpglory.com/t/grafana/
 
 ## About CorpGlory Inc.
 The project developed by [CorpGlory Inc.](https://corpglory.com/), a company which provides high quality software development, data visualization, Grafana and monitoring consulting.
