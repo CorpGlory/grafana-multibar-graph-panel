@@ -202,7 +202,7 @@ class GraphCtrl extends MetricsPanelCtrl {
     this.render([]);
   }
 
-  onDataReceived(dataList) {
+  async onDataReceived(dataList) {
     this.dataList = dataList;
     this.seriesList = this.processor.getSeriesList({
       dataList: dataList,
@@ -231,18 +231,13 @@ class GraphCtrl extends MetricsPanelCtrl {
       }
     }
 
-    this.annotationsPromise.then(
-      result => {
-        this.loading = false;
-        this.alertState = result.alertState;
-        this.annotations = result.annotations;
-        this.render(this.seriesList);
-      },
-      () => {
-        this.loading = false;
-        this.render(this.seriesList);
-      }
-    );
+    if(this.annotationsPromise !== undefined) {
+      const result = await this.annotationsPromise;
+      this.alertState = result.alertState;
+      this.annotations = result.annotations;
+    }
+    this.loading = false;
+    this.render(this.seriesList);
   }
 
   onRender(data) {
