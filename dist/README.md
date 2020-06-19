@@ -1,3 +1,6 @@
+> <strong> This project is not activly supported. </strong>
+> Please use https://github.com/chartwerk/grafana-chartwerk-panel (it has multibar support)
+
 # Multibar Graph Panel
 
 Webpack copy of [Grafana default panel](http://docs.grafana.org/features/panels/graph/) implementing https://github.com/grafana/grafana/issues/870
@@ -8,7 +11,7 @@ Supported Grafana versions: 5.3.3+
 
 # Screenshots
 
-![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/blob/master/src/screenshots/screenshot-1.png)
+![Screenshot](https://github.com/CorpGlory/grafana-multibar-graph-panel/raw/master/src/screenshots/screenshot-1.png)
 
 # Build
 
@@ -17,12 +20,12 @@ npm install
 npm run build
 ```
 
-# Credits
-
-Based on 
+# See also
 
 * [grafana-plugin-template-webpack](https://github.com/CorpGlory/grafana-plugin-template-webpack)
 * [grafana-graph-panel](https://github.com/CorpGlory/grafana-graph-panel)
 * [@types/grafana](https://github.com/CorpGlory/types-grafana)
+* more about Grafana from CorpGlory: https://corpglory.com/t/grafana/
 
-Made by [CorpGlory Team](http://corpglory.com/)
+## About CorpGlory Inc.
+The project developed by [CorpGlory Inc.](https://corpglory.com/), a company which provides high quality software development, data visualization, Grafana and monitoring consulting.
