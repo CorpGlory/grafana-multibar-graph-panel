@@ -3,9 +3,6 @@
 
 # Multibar Graph Panel
 
-[![dependencies Status](https://david-dm.org/CorpGlory/grafana-multibar-graph-panel/status.svg)](https://david-dm.org/CorpGlory/grafana-multibar-graph-panel)
-[![devDependencies Status](https://david-dm.org/CorpGlory/grafana-multibar-graph-panel/dev-status.svg)](https://david-dm.org/CorpGlory/grafana-multibar-graph-panel?type=dev)
-
 Webpack copy of [Grafana default panel](http://docs.grafana.org/features/panels/graph/) implementing https://github.com/grafana/grafana/issues/870
 
 The plugin is under development. Please goto [Build section](https://github.com/CorpGlory/grafana-multibar-graph-panel#build) to build it from source.
