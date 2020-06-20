@@ -1,5 +1,5 @@
 > <strong> This project is not activly supported. </strong>
-> Please use https://github.com/chartwerk/grafana-chartwerk-panel (it has multibar support)
+> Please use https://github.com/chartwerk/grafana-chartwerk-app (it has multibar support)
 
 # Multibar Graph Panel
 
