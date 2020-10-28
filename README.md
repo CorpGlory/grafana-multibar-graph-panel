@@ -25,6 +25,7 @@ npm run build
 * [grafana-plugin-template-webpack](https://github.com/CorpGlory/grafana-plugin-template-webpack)
 * [grafana-graph-panel](https://github.com/CorpGlory/grafana-graph-panel)
 * [@types/grafana](https://github.com/CorpGlory/types-grafana)
+* https://github.com/CorpGlory/grafana-progress-list
 * more about Grafana from CorpGlory: https://corpglory.com/t/grafana/
 
 ## About CorpGlory Inc.
