@@ -350,6 +350,17 @@ export class GraphRenderer {
   }
 
   private _displaySideBySide(options) {
+    this.sortedSeries.forEach((series, index) => {
+      let datapoints = series.datapoints
+      let valuesDataPoints = []
+      datapoints.forEach((datapoint) => {
+        let dpval = datapoint[0]
+        if (dpval !== null){
+          valuesDataPoints.push(datapoint)
+        }
+      })
+      this.sortedSeries[index]["datapoints"] = valuesDataPoints
+    });
     let barsSeries = _.filter(this.sortedSeries, series => series.bars && series.bars.show !== false);
     let barWidth = options.series.bars.barWidth / barsSeries.length;
     for(let i = 0; i < barsSeries.length; ++i) {
